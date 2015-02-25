@@ -10,9 +10,6 @@ class Postgresql < Formula
   # "postgres" or "pgsql".
   patch :DATA
 
-  conflicts_with "postgres-xc",
-    :because => "postgresql and postgres-xc install the same binaries."
-
   def install
     ENV.libxml2 if MacOS.version >= :snow_leopard
 
