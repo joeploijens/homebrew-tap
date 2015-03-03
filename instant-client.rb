@@ -33,6 +33,8 @@ class InstantClient < Formula
     sha1 "0ee3385f508d03136f8131672f38b636f0f9f274"
   end
 
+  depends_on :macos => :lion
+
   def install
     buildpath.install resource("sqlplus")
 
