@@ -1,7 +1,7 @@
 class Postgresql < Formula
   homepage "https://www.postgresql.org/"
-  url "https://ftp.postgresql.org/pub/source/v9.4.2/postgresql-9.4.2.tar.bz2"
-  sha256 "81fda191c165ba1d25d75cd0166ece5abdcb4a7f5eca01b349371e279ebb4d11"
+  url "https://ftp.postgresql.org/pub/source/v9.4.3/postgresql-9.4.3.tar.bz2"
+  sha256 "734acfd2ac352dd0cd353d226f3199c2e1a2730200998aea5b38cf685136d755"
 
   depends_on "openssl"
   depends_on "readline"
