@@ -22,6 +22,7 @@ class CacheDownloadStrategy < CurlDownloadStrategy
 end
 
 class InstantClient < Formula
+  desc "Free, light-weight client software for connecting to Oracle databases"
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
   url "file://#{HOMEBREW_CACHE}/instantclient-basiclite-macos.x64-11.2.0.4.0.zip",
     :using => CacheDownloadStrategy

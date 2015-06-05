@@ -1,4 +1,5 @@
 class Postgresql < Formula
+  desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
   url "https://ftp.postgresql.org/pub/source/v9.4.3/postgresql-9.4.3.tar.bz2"
   sha256 "734acfd2ac352dd0cd353d226f3199c2e1a2730200998aea5b38cf685136d755"
