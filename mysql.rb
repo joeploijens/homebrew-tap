@@ -65,10 +65,9 @@ class Mysql < Formula
     bin.install_symlink prefix/"share/mysql/mysql.server"
 
     # Move mysqlaccess to libexec
-    libexec.mkpath
-    mv "#{bin}/mysqlaccess", libexec
-    mv "#{bin}/mysqlaccess.conf", libexec
-    chmod 0644, "#{libexec}/mysqlaccess.conf"
+    libexec.install bin/"mysqlaccess"
+    libexec.install bin/"mysqlaccess.conf"
+    chmod 0644, libexec/"mysqlaccess.conf"
   end
 
   def post_install
