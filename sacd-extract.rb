@@ -1,11 +1,17 @@
 class SacdExtract < Formula
   desc "Extract DSD files from an SACD image"
-  homepage "https://sourceforge.net/p/sacd-ripper/"
-  url "https://downloads.sf.net/project/sacd-ripper/sacd_extract_0.3.6_OS_X.zip"
-  version "0.3.6"
-  sha256 "e0280ab7c111efc81375449e0aee40bb6af03736b4f39095e0fdc3fa6b078b6b"
+  homepage "https://github.com/sacd-ripper/sacd-ripper/"
+  url "https://github.com/sacd-ripper/sacd-ripper/archive/0.3.8.tar.gz"
+  sha256 "8c65c5fa518cb2c9d7c7221b6cd322ef1553341c6eb47bc670979e0eb7cefcce"
 
   def install
+    cd "tools/sacd_extract"
+    system "cmake", "."
+    system "make"
     bin.install "sacd_extract"
+  end
+
+  test do
+    system bin/"sacd_extract", "--help"
   end
 end
