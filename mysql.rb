@@ -1,10 +1,10 @@
 class Mysql < Formula
   desc "Relational database management system"
-  homepage "https://dev.mysql.com/doc/refman/5.6/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.27.tar.gz"
-  sha256 "8356bba23f3f6c0c2d4806110c41d1c4d6a4b9c50825e11c5be4bbee2b20b71d"
+  homepage "https://dev.mysql.com/doc/refman/5.7/en/"
+  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.9.tar.gz"
+  sha256 "315342f5bee1179548cecad2d776cd7758092fd2854024e60a3a5007feba34e0"
 
-  depends_on :macos => :mountain_lion
+  depends_on :macos => :mavericks
   depends_on "cmake" => :build
 
   def install
@@ -46,6 +46,8 @@ class Mysql < Formula
       -DWITH_EDITLINE=bundled
       -DWITH_INNOBASE_STORAGE_ENGINE=1
       -DWITH_SSL=bundled
+      -DDOWNLOAD_BOOST=1
+      -DWITH_BOOST=.
     ]
 
     system "cmake", *args
@@ -63,11 +65,6 @@ class Mysql < Formula
       s.gsub!(/pidof/, "pgrep")
     end
     bin.install_symlink prefix/"share/mysql/mysql.server"
-
-    # Move mysqlaccess to libexec
-    libexec.install bin/"mysqlaccess"
-    libexec.install bin/"mysqlaccess.conf"
-    chmod 0644, libexec/"mysqlaccess.conf"
   end
 
   def post_install
