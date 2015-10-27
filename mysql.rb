@@ -34,7 +34,6 @@ class Mysql < Formula
       -DINSTALL_MYSQLTESTDIR=
       -DINSTALL_PLUGINDIR=lib/mysql/plugin
       -DINSTALL_SCRIPTDIR=bin
-      -DINSTALL_SQLBENCHDIR=
       -DINSTALL_SUPPORTFILESDIR=share/mysql
       -DMYSQL_DATADIR=#{var}/db/mysql
       -DSYSCONFDIR=#{etc}
