@@ -14,6 +14,12 @@ class Postgresql < Formula
   def install
     ENV.libxml2 if MacOS.version >= :snow_leopard
 
+    # Add include and library directories of dependencies, so that they can be
+    # used for compiling extensions. Superenv does this when compiling this
+    # package, but won't record it for pg_config.
+    ENV.prepend "CPPLAGS", "-I#{Formula["openssl"].opt_include} -I#{Formula["readline"].opt_include}"
+    ENV.prepend "LDFLAGS", "-L#{Formula["openssl"].opt_lib} -L#{Formula["readline"].opt_lib}"
+
     args = %W[
       --prefix=#{prefix}
       --datadir=#{share}/#{name}
