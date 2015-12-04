@@ -1,11 +1,12 @@
 class Mysql < Formula
   desc "Relational database management system"
   homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.9.tar.gz"
-  sha256 "315342f5bee1179548cecad2d776cd7758092fd2854024e60a3a5007feba34e0"
+  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.10.tar.gz"
+  sha256 "1ea1644884d086a23eafd8ccb04d517fbd43da3a6a06036f23c5c3a111e25c74"
 
   depends_on :macos => :mavericks
   depends_on "cmake" => :build
+  depends_on "openssl"
 
   def install
     # Don't hard-code the libtool path. See:
@@ -42,9 +43,9 @@ class Mysql < Formula
       -DENABLED_LOCAL_INFILE=ON
       -DWITH_DEBUG=OFF
       -DWITH_EMBEDDED_SERVER=OFF
-      -DWITH_EDITLINE=bundled
+      -DWITH_EDITLINE=system
       -DWITH_INNOBASE_STORAGE_ENGINE=1
-      -DWITH_SSL=bundled
+      -DWITH_SSL=system
       -DDOWNLOAD_BOOST=1
       -DWITH_BOOST=.
     ]
