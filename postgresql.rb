@@ -1,8 +1,8 @@
 class Postgresql < Formula
   desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
-  url "https://ftp.postgresql.org/pub/source/v9.4.5/postgresql-9.4.5.tar.bz2"
-  sha256 "b87c50c66b6ea42a9712b5f6284794fabad0616e6ae420cf0f10523be6d94a39"
+  url "https://ftp.postgresql.org/pub/source/v9.5.0/postgresql-9.5.0.tar.bz2"
+  sha256 "f1c0d3a1a8aa8c92738cab0153fbfffcc4d4158b3fee84f7aa6bfea8283978bc"
 
   depends_on "openssl"
   depends_on "readline"
@@ -13,12 +13,6 @@ class Postgresql < Formula
 
   def install
     ENV.libxml2 if MacOS.version >= :snow_leopard
-
-    # Add include and library directories of dependencies, so that they can be
-    # used for compiling extensions. Superenv does this when compiling this
-    # package, but won't record it for pg_config.
-    ENV.prepend "CPPLAGS", "-I#{Formula["openssl"].opt_include} -I#{Formula["readline"].opt_include}"
-    ENV.prepend "LDFLAGS", "-L#{Formula["openssl"].opt_lib} -L#{Formula["readline"].opt_lib}"
 
     args = %W[
       --prefix=#{prefix}
@@ -39,6 +33,15 @@ class Postgresql < Formula
       --with-python
       --with-tcl
     ]
+
+    # Add include and library directories of dependencies, so that they can be
+    # used for compiling extensions. Superenv does this when compiling this
+    # package, but won't record it for pg_config.
+    deps = %w[openssl readline]
+    with_includes = deps.map { |f| Formula[f].opt_include }.join(":")
+    with_libraries = deps.map { |f| Formula[f].opt_lib }.join(":")
+    args << "--with-includes=#{with_includes}"
+    args << "--with-libraries=#{with_libraries}"
 
     system "./configure", *args
     system "make", "install-world"
