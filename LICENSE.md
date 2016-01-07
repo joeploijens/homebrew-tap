@@ -1,4 +1,4 @@
-Copyright 2015 Joep Loijens.
+Copyright 2015-2016 Joep Loijens.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
