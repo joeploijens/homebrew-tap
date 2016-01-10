@@ -1,7 +1,3 @@
-# Installs the necessary files for running SQL*Plus with Instant Client.
-# The Basic Lite package with only English error messages and Unicode, ASCII,
-# and Western European character set support is used.
-
 class CacheDownloadStrategy < CurlDownloadStrategy
   def fetch
     archive = @url.sub(%r[^file://], "")
@@ -26,12 +22,12 @@ class InstantClient < Formula
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
   url "file://#{HOMEBREW_CACHE}/instantclient-basiclite-macos.x64-11.2.0.4.0.zip",
     :using => CacheDownloadStrategy
-  sha1 "79f4b3090e15c392ef85626bb24793e57d02fe24"
+  sha256 "d51c5fb67d1213c9b3c6301c6f73fe1bef45f78197e1bae7804df4c0abb468a7"
 
   resource "sqlplus" do
     url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-11.2.0.4.0.zip",
       :using => CacheDownloadStrategy
-    sha1 "0ee3385f508d03136f8131672f38b636f0f9f274"
+    sha256 "127d2baaa4c72d8591af829f00dea5e2a77c0e272ce8fc091dd853e9406845b9"
   end
 
   depends_on :macos => :lion
@@ -111,8 +107,16 @@ class InstantClient < Formula
              f
     end
 
+    system "install_name_tool",
+           "-add_rpath",
+           "#{opt_lib}",
+           "libclntsh.dylib.11.1"
+
     prefix.install Dir["*_README"]
     bin.install oracle_bin
+    %w[libclntsh.dylib libocci.dylib].each do |dylib|
+      ln_s "#{dylib}.11.1", dylib
+    end
     lib.install Dir["*.dylib*"]
     (prefix/"sqlplus/admin").mkpath
     (prefix/"sqlplus/admin").install "glogin.sql"
