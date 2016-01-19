@@ -7,16 +7,27 @@ class Hadoop < Formula
 
   bottle :unneeded
 
+  option "without-docs", "Do not install documentation"
+
   depends_on :java => "1.6+"
 
   def install
-    # Remove cruft
-    rm_f Dir["bin/*.cmd", "sbin/*.cmd", "libexec/*.cmd", "etc/hadoop/*.cmd"]
+    if build.without? "docs"
+      rm_rf "share/doc"
+    end
+
+    # Remove Linux binaries and associated files
     rm_f Dir["bin/container-executor", "bin/test-container-executor", "etc/hadoop/container-executor.cfg"]
+
+    # Remove Windows script files
+    rm_f Dir["bin/*.cmd", "sbin/*.cmd", "libexec/*.cmd", "etc/hadoop/*.cmd"]
+    rm_f Dir["share/hadoop/httpfs/tomcat/bin/*.bat", "share/hadoop/kms/tomcat/bin/*.bat"]
+
+    # Duplicate
     rm_f "sbin/hdfs-config.sh"
-    rm_rf "share/doc"
-    rm_f Dir["share/hadoop/httpfs/tomcat/bin/*.bat", "share/hadoop/httpfs/tomcat/bin/*.tar.gz"]
-    rm_f Dir["share/hadoop/kms/tomcat/bin/*.bat", "share/hadoop/kms/tomcat/bin/*.tar.gz"]
+
+    # Remove cruft
+    rm_f Dir["share/hadoop/httpfs/tomcat/bin/*.tar.gz", "share/hadoop/kms/tomcat/bin/*.tar.gz"]
     rm_rf "share/hadoop/common/jdiff"
     rm_rf "share/hadoop/common/sources"
     rm_rf "share/hadoop/common/templates"
@@ -64,6 +75,7 @@ class Hadoop < Formula
   end
 
   def post_install
+    # Make sure runtime directories exist
     (etc/"hadoop").mkpath unless File.exist? "#{etc}/hadoop"
     (var/"hadoop/hdfs/dn").mkpath unless File.exist? "#{var}/hadoop/hdfs/dn"
     (var/"hadoop/hdfs/nn").mkpath unless File.exist? "#{var}/hadoop/hdfs/nn"
