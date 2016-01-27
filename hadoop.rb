@@ -1,15 +1,15 @@
 class Hadoop < Formula
   desc "Framework for distributed processing of large data sets"
   homepage "https://hadoop.apache.org/"
-  url "https://www.apache.org/dyn/closer.cgi?path=hadoop/common/hadoop-2.6.3/hadoop-2.6.3.tar.gz"
-  mirror "https://archive.apache.org/dist/hadoop/common/hadoop-2.6.3/hadoop-2.6.3.tar.gz"
-  sha256 "ada83d8c2ff72d4665ca2d70ce77af79bd57265beb3ce253cd2869b507e32152"
+  url "https://www.apache.org/dyn/closer.cgi?path=hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz"
+  mirror "https://archive.apache.org/dist/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz"
+  sha256 "49ad740f85d27fa39e744eb9e3b1d9442ae63d62720f0aabdae7aa9a718b03f7"
 
   bottle :unneeded
 
   option "without-docs", "Do not install documentation"
 
-  depends_on :java => "1.6+"
+  depends_on :java => "1.7+"
 
   def install
     if build.without? "docs"
@@ -38,6 +38,7 @@ class Hadoop < Formula
     rm_rf "share/hadoop/tools/sources"
     rm_rf "share/hadoop/yarn/sources"
 
+    # Define the layout of Hadoop directories
     (buildpath/"libexec/hadoop-layout.sh").write <<-EOS.undent
       HADOOP_CONF_DIR=#{etc}/hadoop
       YARN_CONF_DIR=#{etc}/hadoop
@@ -50,6 +51,7 @@ class Hadoop < Formula
     EOS
     chmod 0755, buildpath/"libexec/hadoop-layout.sh"
 
+    # Install
     libexec.install %w[bin sbin libexec share etc]
     bin.write_exec_script Dir["#{libexec}/bin/*"]
     sbin.write_exec_script Dir["#{libexec}/sbin/*"]
@@ -65,13 +67,13 @@ class Hadoop < Formula
 
     inreplace "#{libexec}/etc/hadoop/hadoop-env.sh",
       "export JAVA_HOME=${JAVA_HOME}",
-      "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
+      "export JAVA_HOME=\"$(/usr/libexec/java_home -v 1.7+)\""
     inreplace "#{libexec}/etc/hadoop/yarn-env.sh",
       "# export JAVA_HOME=/home/y/libexec/jdk1.6.0/",
-      "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
+      "export JAVA_HOME=\"$(/usr/libexec/java_home -v 1.7+)\""
     inreplace "#{libexec}/etc/hadoop/mapred-env.sh",
       "# export JAVA_HOME=/home/y/libexec/jdk1.6.0/",
-      "export JAVA_HOME=\"$(/usr/libexec/java_home)\""
+      "export JAVA_HOME=\"$(/usr/libexec/java_home -v 1.7+)\""
   end
 
   def post_install
