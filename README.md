@@ -11,12 +11,12 @@ Or `brew tap joeploijens/tap` and then `brew install <formula>`.
 Or install via URL (which will not receive updates):
 
 ```
-brew install https://raw.githubusercontent.com/joeploijens/homebrew-tap/master/<formula>.rb
+brew install https://raw.githubusercontent.com/joeploijens/homebrew-tap/master/Formula/<formula>.rb
 ```
 
-If the formula conflicts with one from Homebrew/homebrew or another tap, you
+If the formula conflicts with one from Homebrew/homebrew-core or another tap, you
 can `brew install joeploijens/tap/<formula>`.
 
 ## Documentation
 
-`brew help`, `man brew` or check [Homebrew's documentation](https://github.com/Homebrew/homebrew/tree/master/share/doc/homebrew#readme).
+`brew help`, `man brew` or check [Homebrew's documentation](https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/README.md).
