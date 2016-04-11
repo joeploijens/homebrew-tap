@@ -1,8 +1,8 @@
 class Mysql < Formula
   desc "Relational database management system"
   homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.11.tar.gz"
-  sha256 "ab21347ba004a5aa349b911d829a14e79b1e36e4bcd007d39d75212071414e28"
+  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.12.tar.gz"
+  sha256 "32843cb6d22ab22cd2340262b53c0d6009b5bd41b1fa4102beda19635a5c1c87"
 
   depends_on :macos => :mavericks
   depends_on "cmake" => :build
@@ -46,7 +46,8 @@ class Mysql < Formula
       -DWITH_EDITLINE=system
       -DWITH_INNOBASE_STORAGE_ENGINE=1
       -DWITH_SSL=system
-      -DWITH_BOOST=boost
+      -DWITH_BOOST=.
+      -DDOWNLOAD_BOOST=ON
     ]
 
     system "cmake", *args
