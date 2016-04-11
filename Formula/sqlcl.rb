@@ -33,10 +33,11 @@ class Sqlcl < Formula
     rm_f Dir["bin/*.bat", "bin/*.exe"]
 
     libexec.install %w[bin lib]
-    bin.write_exec_script Dir["#{libexec}/bin/*"]
+    bin.write_exec_script Dir["#{libexec}/bin/sql"]
+    mv "#{bin}/sql", "#{bin}/sqlcl"
   end
 
   test do
-    system bin/"sql", "-V"
+    system bin/"sqlcl", "-V"
   end
 end
