@@ -30,6 +30,8 @@ class InstantClient < Formula
     sha256 "127d2baaa4c72d8591af829f00dea5e2a77c0e272ce8fc091dd853e9406845b9"
   end
 
+  bottle :unneeded
+
   depends_on :macos => :lion
 
   def install
