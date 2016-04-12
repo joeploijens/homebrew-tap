@@ -20,9 +20,9 @@ end
 class InstantClient < Formula
   desc "Free, light-weight client software for connecting to Oracle databases"
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
-  url "file://#{HOMEBREW_CACHE}/instantclient-basiclite-macos.x64-11.2.0.4.0.zip",
+  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-11.2.0.4.0.zip",
     :using => CacheDownloadStrategy
-  sha256 "d51c5fb67d1213c9b3c6301c6f73fe1bef45f78197e1bae7804df4c0abb468a7"
+  sha256 "6c079713ab0a65193f7bfcbad6c90e7806fa6634a3828052f8428e1533bb89d3"
 
   resource "sqlplus" do
     url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-11.2.0.4.0.zip",
@@ -88,7 +88,7 @@ class InstantClient < Formula
              f
     end
 
-    oracle_bundle = %W[libociicus.dylib libocijdbc11.dylib libsqlplusic.dylib]
+    oracle_bundle = %W[libociei.dylib libocijdbc11.dylib libsqlplusic.dylib]
     oracle_bundle.each do |f|
       system "install_name_tool",
              "-change",
@@ -114,7 +114,7 @@ class InstantClient < Formula
 
     prefix.install Dir["*_README"]
     bin.install oracle_bin
-    %w[libclntsh.dylib libocci.dylib].each do |dylib|
+    %W[libclntsh.dylib libocci.dylib].each do |dylib|
       ln_s "#{dylib}.11.1", dylib
     end
     lib.install Dir["*.dylib*"]
