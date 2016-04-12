@@ -1,8 +1,8 @@
 class Mysql < Formula
   desc "Relational database management system"
   homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.12.tar.gz"
-  sha256 "32843cb6d22ab22cd2340262b53c0d6009b5bd41b1fa4102beda19635a5c1c87"
+  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.12.tar.gz"
+  sha256 "3990c78b4064e4e972e763d62449cb8f930717b3dd2ddcbbaeeaa0f644d5333d"
 
   depends_on :macos => :mavericks
   depends_on "cmake" => :build
@@ -46,8 +46,7 @@ class Mysql < Formula
       -DWITH_EDITLINE=system
       -DWITH_INNOBASE_STORAGE_ENGINE=1
       -DWITH_SSL=system
-      -DWITH_BOOST=.
-      -DDOWNLOAD_BOOST=ON
+      -DWITH_BOOST=boost
     ]
 
     system "cmake", *args
@@ -59,7 +58,7 @@ class Mysql < Formula
     rm_rf prefix/"data"
 
     # Fix up the control script and link into bin
-    inreplace "#{share}/mysql/mysql.server" do |s|
+    inreplace "#{pkgshare}/mysql.server" do |s|
       s.gsub!(/^(PATH=".*)(")/, "\\1:#{HOMEBREW_PREFIX}/bin\\2")
       # pidof can be replaced with pgrep from proctools on Mountain Lion
       s.gsub!(/pidof/, "pgrep")
