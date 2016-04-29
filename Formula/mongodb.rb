@@ -3,15 +3,15 @@ require "language/go"
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-  url "https://fastdl.mongodb.org/src/mongodb-src-r3.2.5.tar.gz"
-  sha256 "e99e00ee243945309c1a779bd3bc73d4fdf09ece900b14b5fa429e02142d1385"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r3.2.6.tar.gz"
+  sha256 "0415a9b503f62e40d2ba87f555b553757a14fac281d1d6a583d8d880b8720921"
 
   option "with-sasl", "Compile with SASL support"
 
+  depends_on :macos => :yosemite
   depends_on "go" => :build
-  depends_on :macos => :mountain_lion
-  depends_on "scons" => :build
   depends_on "openssl" => :recommended
+  depends_on "scons" => :build
 
   go_resource "github.com/mongodb/mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
@@ -22,8 +22,6 @@ class Mongodb < Formula
   needs :cxx11
 
   def install
-    ENV.cxx11 if MacOS.version < :mavericks
-
     # New Go tools have their own build script but the server scons "install" target is still
     # responsible for installing them.
     #Language::Go.stage_deps resources, buildpath/"src"
@@ -44,6 +42,8 @@ class Mongodb < Formula
       end
 
       args = %W[]
+
+      args << "sasl" if build.with? "sasl"
 
       if build.with? "openssl"
         args << "ssl"
@@ -67,7 +67,7 @@ class Mongodb < Formula
 
     args << "--use-sasl-client" if build.with? "sasl"
     args << "--use-new-tools"
-    args << "--disable-warnings-as-errors" if MacOS.version >= :yosemite
+    args << "--disable-warnings-as-errors"
 
     if build.with? "openssl"
       args << "--ssl"
