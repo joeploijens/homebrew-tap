@@ -39,6 +39,7 @@ class InstantClient < Formula
 
     # Fix permissions
     chmod "u+w,go-w", Dir["./*"]
+    chmod "a-x", "glogin.sql"
 
     # Fix install names
     system "install_name_tool", "-id", "@rpath/liboramysql12.dylib", "liboramysql12.dylib"
