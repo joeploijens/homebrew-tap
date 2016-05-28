@@ -20,19 +20,19 @@ end
 class InstantClient < Formula
   desc "Free, light-weight client software for connecting to Oracle databases"
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
-  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-11.2.0.4.0.zip",
+  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-12.1.0.2.0.zip",
     :using => CacheDownloadStrategy
-  sha256 "6c079713ab0a65193f7bfcbad6c90e7806fa6634a3828052f8428e1533bb89d3"
+  sha256 "8c72abe1ee29c6f85c82851cfe5cdfc31bff09e162438aa755fc76f7a78bd1b6"
 
   resource "sqlplus" do
-    url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-11.2.0.4.0.zip",
+    url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-12.1.0.2.0.zip",
       :using => CacheDownloadStrategy
-    sha256 "127d2baaa4c72d8591af829f00dea5e2a77c0e272ce8fc091dd853e9406845b9"
+    sha256 "8eb5bc4da372c6d58de3b3af30a5736a392278272ea04d4400e0b3926a9bf6b8"
   end
 
   bottle :unneeded
 
-  depends_on :macos => :lion
+  depends_on :macos => :mavericks
 
   def install
     buildpath.install resource("sqlplus")
@@ -41,83 +41,12 @@ class InstantClient < Formula
     chmod "u+w,go-w", Dir["./*"]
 
     # Fix install names
-    oracle_bin = %W[adrci genezi uidrvci sqlplus]
-    oracle_bin.each do |f|
-      system "install_name_tool",
-             "-change",
-             "/ade/b/3071542110/oracle/rdbms/lib/libclntsh.dylib.11.1",
-             "#{opt_lib}/libclntsh.dylib.11.1",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/dosulliv_ldapmac/oracle/ldap/lib/libnnz11.dylib",
-             "#{opt_lib}/libnnz11.dylib",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/dosulliv_sqlplus_mac/oracle/sqlplus/lib/libsqlplus.dylib",
-             "#{opt_lib}/libsqlplus.dylib",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/b/2475221476/oracle/rdbms/lib/libclntsh.dylib.11.1",
-             "#{opt_lib}/libclntsh.dylib.11.1",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/b/2475221476/oracle/ldap/lib/libnnz11.dylib",
-             "#{opt_lib}/libnnz11.dylib",
-             f
-    end
-
-    oracle_dylib = %W[libclntsh.dylib.11.1 libnnz11.dylib libocci.dylib.11.1 libsqlplus.dylib]
-    oracle_dylib.each do |f|
-      system "install_name_tool", "-id", f, f
-      system "install_name_tool",
-             "-change",
-             "/ade/dosulliv_ldapmac/oracle/ldap/lib/libnnz11.dylib",
-             "#{opt_lib}/libnnz11.dylib",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/b/2475221476/oracle/rdbms/lib/libclntsh.dylib.11.1",
-             "#{opt_lib}/libclntsh.dylib.11.1",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/b/2475221476/oracle/ldap/lib/libnnz11.dylib",
-             "#{opt_lib}/libnnz11.dylib",
-             f
-    end
-
-    oracle_bundle = %W[libociei.dylib libocijdbc11.dylib libsqlplusic.dylib]
-    oracle_bundle.each do |f|
-      system "install_name_tool",
-             "-change",
-             "/ade/b/3071542110/oracle/rdbms/lib/libclntsh.dylib.11.1",
-             "#{opt_lib}/libclntsh.dylib.11.1",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/b/2475221476/oracle/rdbms/lib/libclntsh.dylib.11.1",
-             "#{opt_lib}/libclntsh.dylib.11.1",
-             f
-      system "install_name_tool",
-             "-change",
-             "/ade/b/2475221476/oracle/ldap/lib/libnnz11.dylib",
-             "#{opt_lib}/libnnz11.dylib",
-             f
-    end
-
-    system "install_name_tool",
-           "-add_rpath",
-           "#{opt_lib}",
-           "libclntsh.dylib.11.1"
+    system "install_name_tool", "-id", "@rpath/liboramysql12.dylib", "liboramysql12.dylib"
 
     prefix.install Dir["*_README"]
-    bin.install oracle_bin
+    bin.install %W[adrci genezi uidrvci sqlplus]
     %W[libclntsh.dylib libocci.dylib].each do |dylib|
-      ln_s "#{dylib}.11.1", dylib
+      ln_s "#{dylib}.12.1", dylib
     end
     lib.install Dir["*.dylib*"]
     (prefix/"sqlplus/admin").mkpath
