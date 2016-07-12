@@ -1,5 +1,3 @@
-require "language/go"
-
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
@@ -13,7 +11,7 @@ class Mongodb < Formula
   depends_on "openssl" => :recommended
   depends_on "scons" => :build
 
-  go_resource "github.com/mongodb/mongo-tools" do
+  resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
       :tag => "r3.2.8",
       :revision => "2214d4d6561574f962c1dc72fefce4fe11843023"
@@ -22,16 +20,7 @@ class Mongodb < Formula
   needs :cxx11
 
   def install
-    # New Go tools have their own build script but the server scons "install" target is still
-    # responsible for installing them.
-    #Language::Go.stage_deps resources, buildpath/"src"
-
-    # Work around an issue with the Go resource not being a Git repository after staging.
-    # https://github.com/Homebrew/homebrew/issues/40136
-    (buildpath/"src/github.com/mongodb").mkpath
-    cd "src/github.com/mongodb" do
-      system "git", "clone", "--depth", "1", "--branch", "r3.2.8", "https://github.com/mongodb/mongo-tools", "mongo-tools"
-    end
+    (buildpath/"src/github.com/mongodb/mongo-tools").install resource("mongo-tools")
 
     cd "src/github.com/mongodb/mongo-tools" do
       # Fix -ldflags -X syntax. As of Go 1.5 -X takes one argument instead of two
