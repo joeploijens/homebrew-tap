@@ -1,8 +1,8 @@
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-  url "https://fastdl.mongodb.org/src/mongodb-src-r3.2.8.tar.gz"
-  sha256 "5501e0e90c9358358e9ee20d4814643e910b847827627ed7ca1a9d90d220c0a7"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r3.2.9.tar.gz"
+  sha256 "5998f45602786b57f7bd4296a33c827e2a4a251e17804207fcc2a0226d34e29c"
 
   option "with-sasl", "Compile with SASL support"
 
@@ -13,8 +13,8 @@ class Mongodb < Formula
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      :tag => "r3.2.8",
-      :revision => "2214d4d6561574f962c1dc72fefce4fe11843023"
+      :tag => "r3.2.9",
+      :revision => "4a4e7d30773b28cf66f75e45bc289a5d3ca49ddd"
   end
 
   needs :cxx11
@@ -23,13 +23,6 @@ class Mongodb < Formula
     (buildpath/"src/github.com/mongodb/mongo-tools").install resource("mongo-tools")
 
     cd "src/github.com/mongodb/mongo-tools" do
-      # Fix -ldflags -X syntax. As of Go 1.5 -X takes one argument instead of two
-      # separate arguments. See: https://golang.org/cmd/link/
-      inreplace "build.sh" do |s|
-        s.gsub! "options.Gitspec ", "options.Gitspec="
-        s.gsub! "options.VersionStr ", "options.VersionStr="
-      end
-
       args = %W[]
 
       args << "sasl" if build.with? "sasl"
@@ -73,6 +66,6 @@ class Mongodb < Formula
   end
 
   test do
-    system "#{bin}/mongod", "--sysinfo"
+    system bin/"mongod", "--sysinfo"
   end
 end
