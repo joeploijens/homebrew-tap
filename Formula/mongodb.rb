@@ -2,7 +2,7 @@ class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
   url "https://fastdl.mongodb.org/src/mongodb-src-r3.2.9.tar.gz"
-  sha256 "5998f45602786b57f7bd4296a33c827e2a4a251e17804207fcc2a0226d34e29c"
+  sha256 "25f8817762b784ce870edbeaef14141c7561eb6d7c14cd3197370c2f9790061b"
 
   option "with-sasl", "Compile with SASL support"
 
