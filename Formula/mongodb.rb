@@ -6,15 +6,15 @@ class Mongodb < Formula
 
   option "with-sasl", "Compile with SASL support"
 
-  depends_on :macos => :yosemite
   depends_on "go" => :build
+  depends_on macos: :yosemite
   depends_on "openssl" => :recommended
   depends_on "scons" => :build
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      :tag => "r3.2.9",
-      :revision => "4a4e7d30773b28cf66f75e45bc289a5d3ca49ddd"
+      tag: "r3.2.9",
+      revision: "4a4e7d30773b28cf66f75e45bc289a5d3ca49ddd"
   end
 
   needs :cxx11

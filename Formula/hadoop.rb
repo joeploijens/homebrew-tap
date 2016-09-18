@@ -9,7 +9,7 @@ class Hadoop < Formula
 
   option "without-docs", "Do not install documentation"
 
-  depends_on :java => "1.7+"
+  depends_on java: "1.7+"
 
   def install
     if build.without? "docs"

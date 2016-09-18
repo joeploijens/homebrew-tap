@@ -21,12 +21,12 @@ class Sqlcl < Formula
   desc "Free, Java-based command-line interface for Oracle databases"
   homepage "https://www.oracle.com/technetwork/developer-tools/sql-developer/overview/index.html"
   url "file://#{HOMEBREW_CACHE}/sqlcl-4.2.0.16.260.1205-no-jre.zip",
-    :using => CacheDownloadStrategy
+    using: CacheDownloadStrategy
   sha256 "a063064ec1f725a9c5e40b5c7d94219c6dab5756c7a925afa775d62eb79aa6a5"
 
   bottle :unneeded
 
-  depends_on :java => "1.8+"
+  depends_on java: "1.8+"
 
   def install
     # Remove Windows script files

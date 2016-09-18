@@ -4,8 +4,8 @@ class Mysql < Formula
   url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.15.tar.gz"
   sha256 "7342a3a3e40878378dfaee252d42a3a5b06c58237f49c2544424d27316738945"
 
-  depends_on :macos => :mavericks
   depends_on "cmake" => :build
+  depends_on macos: :mavericks
   depends_on "openssl"
 
   def install
