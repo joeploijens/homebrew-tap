@@ -20,9 +20,9 @@ end
 class Sqlcl < Formula
   desc "Free, Java-based command-line interface for Oracle databases"
   homepage "https://www.oracle.com/technetwork/developer-tools/sql-developer/overview/index.html"
-  url "file://#{HOMEBREW_CACHE}/sqlcl-4.2.0.16.175.1027-no-jre.zip",
+  url "file://#{HOMEBREW_CACHE}/sqlcl-4.2.0.16.260.1205-no-jre.zip",
     :using => CacheDownloadStrategy
-  sha256 "5e80608ee961c0e77dffa4557c0fa0d7f0c824e341b0fd7243dc138dd838aff0"
+  sha256 "a063064ec1f725a9c5e40b5c7d94219c6dab5756c7a925afa775d62eb79aa6a5"
 
   bottle :unneeded
 
