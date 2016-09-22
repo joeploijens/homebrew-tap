@@ -19,4 +19,4 @@ can `brew install joeploijens/tap/<formula>`.
 
 ## Documentation
 
-`brew help`, `man brew` or check [Homebrew's documentation](https://github.com/Homebrew/brew/blob/master/docs/homebrew/README.md#readme).
+`brew help`, `man brew` or check [Homebrew's documentation](https://github.com/Homebrew/brew/blob/master/docs/README.md#readme).
