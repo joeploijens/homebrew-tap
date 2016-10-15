@@ -21,12 +21,8 @@ class Mysql < Formula
 
     # -DINSTALL_* are relative to prefix
     args = %W[
-      .
       -DBUILD_CONFIG=mysql_release
       -DFEATURE_SET=community
-      -DCMAKE_FIND_FRAMEWORK=LAST
-      -DCMAKE_INSTALL_PREFIX=#{prefix}
-      -DCMAKE_VERBOSE_MAKEFILE=ON
       -DINSTALL_DOCDIR=share/doc/#{name}
       -DINSTALL_INCLUDEDIR=include/mysql
       -DINSTALL_INFODIR=share/info
@@ -49,7 +45,7 @@ class Mysql < Formula
       -DWITH_BOOST=boost
     ]
 
-    system "cmake", *args
+    system "cmake", ".", *std_cmake_args, *args
     system "make"
     system "make", "install"
 
