@@ -7,7 +7,7 @@ class Mitmproxy < Formula
   bottle :unneeded
 
   def install
-    bin.install "mitmdump", "mitmproxy"
+    bin.install "mitmdump", "mitmproxy", "mitmweb"
   end
 
   test do
