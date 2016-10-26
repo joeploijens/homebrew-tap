@@ -1,8 +1,8 @@
 class Mitmproxy < Formula
   desc "Intercept, modify, replay, save HTTP/S traffic"
   homepage "https://mitmproxy.org"
-  url "https://github.com/mitmproxy/mitmproxy/releases/download/v0.18.2/mitmproxy-0.18.2-osx.tar.gz"
-  sha256 "fbab9905bfc9919420f70a12b8ccc9e8e461d1ef9901e219d1c6140d39f9a3e5"
+  url "https://snapshots.mitmproxy.org/v0.18.2/mitmproxy-0.18.2-osx.tar.gz"
+  sha256 "bb5d5d1cf4bd5932aa43b0a1672141082bcbc97ec862063d0bea22be11c30d54"
 
   bottle :unneeded
 
