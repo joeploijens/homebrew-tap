@@ -12,8 +12,6 @@ class Postgresql < Formula
   patch :DATA
 
   def install
-    ENV.libxml2 if MacOS.version >= :snow_leopard
-
     args = %W[
       --prefix=#{prefix}
       --datadir=#{share}/#{name}
