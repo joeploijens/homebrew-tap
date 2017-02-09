@@ -1,8 +1,8 @@
 class Postgresql < Formula
   desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
-  url "https://ftp.postgresql.org/pub/source/v9.6.1/postgresql-9.6.1.tar.bz2"
-  sha256 "e5101e0a49141fc12a7018c6dad594694d3a3325f5ab71e93e0e51bd94e51fcd"
+  url "https://ftp.postgresql.org/pub/source/v9.6.2/postgresql-9.6.2.tar.bz2"
+  sha256 "0187b5184be1c09034e74e44761505e52357248451b0c854dddec6c231fe50c9"
 
   depends_on "openssl"
   depends_on "readline"
@@ -50,6 +50,34 @@ class Postgresql < Formula
     # Make sure the run-time directories exist
     %w[db/postgresql log run].each { |p| (var+p).mkpath }
     (etc/"postgresql").mkpath
+  end
+
+  plist_options :manual => "pg_ctl -D #{HOMEBREW_PREFIX}/var/db/postgresql start"
+
+  def plist; <<-EOS.undent
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+      <key>KeepAlive</key>
+      <true/>
+      <key>Label</key>
+      <string>#{plist_name}</string>
+      <key>ProgramArguments</key>
+      <array>
+        <string>#{opt_bin}/postgres</string>
+        <string>-D</string>
+        <string>#{var}/db/postgresql</string>
+      </array>
+      <key>RunAtLoad</key>
+      <true/>
+      <key>WorkingDirectory</key>
+      <string>#{HOMEBREW_PREFIX}</string>
+      <key>StandardErrorPath</key>
+      <string>#{var}/log/postgres.log</string>
+    </dict>
+    </plist>
+    EOS
   end
 
   test do
