@@ -52,8 +52,6 @@ class Mysql < Formula
     # Fix up the control script and link into bin
     inreplace "#{pkgshare}/mysql.server" do |s|
       s.gsub!(/^(PATH=".*)(")/, "\\1:#{HOMEBREW_PREFIX}/bin\\2")
-      # pidof can be replaced with pgrep from proctools on Mountain Lion
-      s.gsub!(/pidof/, "pgrep")
     end
     bin.install_symlink prefix/"share/mysql/mysql.server"
   end
