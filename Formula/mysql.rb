@@ -50,8 +50,8 @@ class Mysql < Formula
     rm_rf prefix/"data"
 
     # Fix up the control script and link into bin
-    inreplace "#{pkgshare}/mysql.server" do |s|
-      s.gsub!(/^(PATH=".*)(")/, "\\1:#{HOMEBREW_PREFIX}/bin\\2")
+    inreplace "#{pkgshare}/mysql.server",
+      /^(PATH=".*)(")/, "\\1:#{HOMEBREW_PREFIX}/bin\\2"
     end
     bin.install_symlink prefix/"share/mysql/mysql.server"
   end
