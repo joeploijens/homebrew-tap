@@ -5,12 +5,12 @@ class Mysql < Formula
   sha256 "ae6f5e2cf7b936496cf60260cd7fd5a0862c21f48cd240448021c4ea067a0f0c"
 
   depends_on "cmake" => :build
-  depends_on macos: :mavericks
+  depends_on :macos => :mavericks
   depends_on "openssl"
 
   def install
     # Don't hard-code the libtool path. See:
-    # https://github.com/Homebrew/homebrew/issues/20185
+    # https://github.com/Homebrew/legacy-homebrew/issues/20185
     inreplace "cmake/libutils.cmake",
       "COMMAND /usr/bin/libtool -static -o ${TARGET_LOCATION}",
       "COMMAND libtool -static -o ${TARGET_LOCATION}"
@@ -46,13 +46,13 @@ class Mysql < Formula
     system "make", "install"
 
     # Don't create databases inside of the prefix!
-    # See: https://github.com/Homebrew/homebrew/issues/4975
+    # See: https://github.com/Homebrew/legacy-homebrew/issues/4975
     rm_rf prefix/"data"
 
     # Fix up the control script and link into bin
     inreplace "#{pkgshare}/mysql.server",
-      /^(PATH=".*)(")/, "\\1:#{HOMEBREW_PREFIX}/bin\\2"
-    end
+      /^(PATH=".*)(")/,
+      "\\1:#{HOMEBREW_PREFIX}/bin\\2"
     bin.install_symlink prefix/"share/mysql/mysql.server"
   end
 
