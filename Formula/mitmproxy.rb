@@ -12,6 +12,6 @@ class Mitmproxy < Formula
 
   test do
     ENV["LANG"] = "en_US.UTF-8"
-    system bin/"mitmproxy", "--version"
+    assert_match version.to_s, shell_output("#{bin}/mitmproxy --version 2>&1")
   end
 end
