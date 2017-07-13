@@ -22,12 +22,12 @@ class InstantClient < Formula
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
   url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-12.1.0.2.0.zip",
     using: CacheDownloadStrategy
-  sha256 "ecbf84ff011fcd8981c2cd9355f958ee42b2e452ebaad2d42df7b226903679cf"
+  sha256 "71aa366c961166fb070eb6ee9e5905358c61d5ede9dffd5fb073301d32cbd20c"
 
   resource "sqlplus" do
     url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-12.1.0.2.0.zip",
       using: CacheDownloadStrategy
-    sha256 "d1a83949aa742a4f7e5dfb39f5d2b15b5687c87edf7d998fe6caef2ad4d9ef6d"
+    sha256 "a663937e2e32c237bb03df1bda835f2a29bc311683087f2d82eac3a8ea569f81"
   end
 
   bottle :unneeded
@@ -39,7 +39,7 @@ class InstantClient < Formula
 
     # Fix permissions
     chmod "u+w,go-w", Dir["./*"]
-    chmod "a-x", "glogin.sql"
+    chmod "u+w,a-x", "glogin.sql"
 
     # Fix install names
     system "install_name_tool", "-id", "@rpath/liboramysql12.dylib", "liboramysql12.dylib"
