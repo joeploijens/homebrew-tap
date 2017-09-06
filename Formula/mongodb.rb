@@ -3,8 +3,8 @@ require "language/go"
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-  url "https://fastdl.mongodb.org/src/mongodb-src-r3.4.7.tar.gz"
-  sha256 "9272e7663c7915e09ad2609e28c58437d760d54a9552c711ea735cd8e1784ec0"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r3.4.8.tar.gz"
+  sha256 "57305c88b5daf1257cd7d89d400be7813f848f32ec756f49ab8b1abfadc8a401"
 
   option "with-boost", "Compile using installed boost, not the version shipped with mongodb"
   option "with-sasl", "Compile with SASL support"
@@ -17,7 +17,7 @@ class Mongodb < Formula
 
   go_resource "github.com/mongodb/mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-        :tag => "r3.4.7",
+        :tag => "r3.4.8",
         :revision => "4f093ae71cdb4c6a6e9de7cd1dc67ea4405f0013",
         :shallow => false
   end
@@ -75,7 +75,9 @@ class Mongodb < Formula
 
     (buildpath+"mongod.conf").write mongodb_conf
     etc.install "mongod.conf"
+  end
 
+  def post_install
     (var+"db/mongodb").mkpath
     (var+"log/mongodb").mkpath
   end
