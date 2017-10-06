@@ -34,6 +34,9 @@ class Postgresql < Formula
       XML2_CONFIG=:
     ]
 
+    # Required to build with Tcl support on 10.13 (High Sierra).
+    args << "--with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework"
+
     # Add include and library directories of dependencies, so that they can be
     # used for compiling extensions. Superenv does this when compiling this
     # package, but won't record it for pg_config.
