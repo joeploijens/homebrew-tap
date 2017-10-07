@@ -5,6 +5,7 @@ class Postgresql < Formula
   url "https://ftp.postgresql.org/pub/source/v#{version}/postgresql-#{version}.tar.bz2"
   sha256 "712f5592e27b81c5b454df96b258c14d94b6b03836831e015c65d6deeae57fd1"
 
+  depends_on :macos => :high_sierra
   depends_on "openssl"
   depends_on "readline"
 
@@ -15,7 +16,7 @@ class Postgresql < Formula
   def install
     args = %W[
       --prefix=#{prefix}
-      --datadir=#{share}/#{name}
+      --datadir=#{pkgshare}
       --docdir=#{doc}
       --includedir=#{include}/#{name}
       --sysconfdir=#{etc}
@@ -31,11 +32,9 @@ class Postgresql < Formula
       --with-perl
       --with-python
       --with-tcl
+      --with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework"
       XML2_CONFIG=:
     ]
-
-    # Required to build with Tcl support on 10.13 (High Sierra).
-    args << "--with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework"
 
     # Add include and library directories of dependencies, so that they can be
     # used for compiling extensions. Superenv does this when compiling this
