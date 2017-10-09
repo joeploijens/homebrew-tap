@@ -23,4 +23,4 @@ brew install https://raw.githubusercontent.com/joeploijens/homebrew-tap/master/F
 
 ## License
 
-Code is under the [BSD 2-clause "Simplified" License](https://github.com/joeploijens/dotfiles/blob/master/LICENSE.txt).
+Code is under the [BSD 2-clause "Simplified" License](https://github.com/joeploijens/homebrew-tap/blob/master/LICENSE.txt).
