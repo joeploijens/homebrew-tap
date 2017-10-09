@@ -15,7 +15,7 @@ class Postgresql < Formula
   def install
     args = %W[
       --prefix=#{prefix}
-      --datadir=#{share}/#{name}
+      --datadir=#{pkgshare}
       --docdir=#{doc}
       --includedir=#{include}/#{name}
       --sysconfdir=#{etc}
@@ -31,11 +31,9 @@ class Postgresql < Formula
       --with-perl
       --with-python
       --with-tcl
+      --with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework
       XML2_CONFIG=:
     ]
-
-    # Required to build with Tcl support on 10.13 (High Sierra).
-    args << "--with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework"
 
     # Add include and library directories of dependencies, so that they can be
     # used for compiling extensions. Superenv does this when compiling this
@@ -90,26 +88,26 @@ class Postgresql < Formula
 end
 
 __END__
---- a/src/Makefile.global.in 2014-07-21 21:10:42.000000000 +0200
-+++ b/src/Makefile.global.in 2014-10-27 13:37:59.000000000 +0100
-@@ -101,20 +101,12 @@
+--- a/src/Makefile.global.in	2017-10-02 23:09:15.000000000 +0200
++++ b/src/Makefile.global.in	2017-10-09 12:14:45.000000000 +0200
+@@ -118,20 +118,12 @@
  libdir := @libdir@
- 
+
  pkglibdir = $(libdir)
 -ifeq "$(findstring pgsql, $(pkglibdir))" ""
 -ifeq "$(findstring postgres, $(pkglibdir))" ""
  override pkglibdir := $(pkglibdir)/postgresql
 -endif
 -endif
- 
+
  includedir := @includedir@
- 
+
  pkgincludedir = $(includedir)
 -ifeq "$(findstring pgsql, $(pkgincludedir))" ""
 -ifeq "$(findstring postgres, $(pkgincludedir))" ""
  override pkgincludedir := $(pkgincludedir)/postgresql
 -endif
 -endif
- 
+
  mandir := @mandir@
- 
+
