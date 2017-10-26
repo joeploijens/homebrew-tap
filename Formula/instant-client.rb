@@ -20,19 +20,19 @@ end
 class InstantClient < Formula
   desc "Free, light-weight client software for connecting to Oracle databases"
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
-  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-12.1.0.2.0.zip",
+  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-12.2.0.1.0.zip",
     using: CacheDownloadStrategy
-  sha256 "71aa366c961166fb070eb6ee9e5905358c61d5ede9dffd5fb073301d32cbd20c"
+  sha256 "04a84542b5bd0a04bc45445e220a67c959a8826ce987000270705f9a1d553157"
 
   resource "sqlplus" do
-    url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-12.1.0.2.0.zip",
+    url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-12.2.0.1.0.zip",
       using: CacheDownloadStrategy
-    sha256 "a663937e2e32c237bb03df1bda835f2a29bc311683087f2d82eac3a8ea569f81"
+    sha256 "df4ab35ed15c49f0c341a487afb50f38b65f80cde385d4007af5d922a9e0e5bf"
   end
 
   bottle :unneeded
 
-  depends_on macos: :mavericks
+  depends_on macos: :el_capitan
 
   def install
     buildpath.install resource("sqlplus")
@@ -46,9 +46,6 @@ class InstantClient < Formula
 
     prefix.install Dir["*_README"]
     bin.install %W[adrci genezi uidrvci sqlplus]
-    %W[libclntsh.dylib libocci.dylib].each do |dylib|
-      ln_s "#{dylib}.12.1", dylib
-    end
     lib.install Dir["*.dylib*"]
     (prefix/"sqlplus/admin").mkpath
     (prefix/"sqlplus/admin").install "glogin.sql"
