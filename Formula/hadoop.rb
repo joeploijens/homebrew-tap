@@ -1,9 +1,9 @@
 class Hadoop < Formula
   desc "Framework for distributed processing of large data sets"
   homepage "https://hadoop.apache.org/"
-  url "https://www.apache.org/dyn/closer.cgi?path=hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz"
-  mirror "https://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz"
-  sha256 "d489df3808244b906eb38f4d081ba49e50c4603db03efd5e594a1e98b09259c2"
+  url "https://www.apache.org/dyn/closer.cgi?path=hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz"
+  mirror "https://archive.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz"
+  sha256 "8f791bfcfa5bb7c7ccd09910d490c02910dda93b19936ec2aedb8930bc5be111"
 
   bottle :unneeded
 
@@ -38,6 +38,7 @@ class Hadoop < Formula
     rm_rf "share/hadoop/mapreduce/sources"
     rm_rf "share/hadoop/tools/sources"
     rm_rf "share/hadoop/yarn/sources"
+    rm_rf "share/hadoop/yarn/test"
 
     # Define the layout of Hadoop directories
     (buildpath/"libexec/hadoop-layout.sh").write <<-EOS.undent
