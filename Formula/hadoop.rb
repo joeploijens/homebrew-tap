@@ -1,9 +1,9 @@
 class Hadoop < Formula
   desc "Framework for distributed processing of large data sets"
   homepage "https://hadoop.apache.org/"
-  url "https://www.apache.org/dyn/closer.cgi?path=hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz"
-  mirror "https://archive.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz"
-  sha256 "8f791bfcfa5bb7c7ccd09910d490c02910dda93b19936ec2aedb8930bc5be111"
+  url "https://www.apache.org/dyn/closer.cgi?path=hadoop/common/hadoop-2.8.2/hadoop-2.8.2.tar.gz"
+  mirror "https://archive.apache.org/dist/hadoop/common/hadoop-2.8.2/hadoop-2.8.2.tar.gz"
+  sha256 "aea99c7ce8441749d81202bdea431f1024f17ee6e0efb3144226883207cc6292"
 
   bottle :unneeded
 
@@ -30,10 +30,9 @@ class Hadoop < Formula
     rm_f Dir["share/hadoop/httpfs/tomcat/bin/*.tar.gz", "share/hadoop/kms/tomcat/bin/*.tar.gz"]
     rm_rf "share/hadoop/common/jdiff"
     rm_rf "share/hadoop/common/sources"
-    rm_rf "share/hadoop/common/templates"
     rm_rf "share/hadoop/hdfs/jdiff"
     rm_rf "share/hadoop/hdfs/sources"
-    rm_rf "share/hadoop/hdfs/templates"
+    rm_rf "share/hadoop/mapreduce/jdiff"
     rm_rf "share/hadoop/mapreduce/lib-examples"
     rm_rf "share/hadoop/mapreduce/sources"
     rm_rf "share/hadoop/tools/sources"
