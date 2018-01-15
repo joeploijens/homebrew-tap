@@ -11,7 +11,7 @@ class Mysql < Formula
   def install
     # Don't hard-code the libtool path. See:
     # https://github.com/Homebrew/legacy-homebrew/issues/20185
-    inreplace "cmake/libutils.cmake",
+    inreplace "cmake/merge_archives.cmake.in",
       "COMMAND /usr/bin/libtool -static -o ${TARGET_LOCATION}",
       "COMMAND libtool -static -o ${TARGET_LOCATION}"
 
