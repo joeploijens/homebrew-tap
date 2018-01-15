@@ -1,11 +1,11 @@
 class Mysql < Formula
   desc "Relational database management system"
   homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.20.tar.gz"
-  sha256 "260582844ac18222ce2826f48b6c7ca387990b19ddb88331af26738b394e42a4"
+  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.21.tar.gz"
+  sha256 "ad29ecb6fb3c3571394fe231633a2d1d188d49e9eb749daa4e8799b7630daa09"
 
   depends_on "cmake" => :build
-  depends_on :macos => :mavericks
+  depends_on :macos => :el_capitan
   depends_on "openssl"
 
   def install
@@ -59,6 +59,31 @@ class Mysql < Formula
   def post_install
     # Make sure the run-time directories exist
     %w[db/mysql log run].each { |p| (var+p).mkpath }
+  end
+
+  plist_options :manual => "mysql.server start"
+
+  def plist; <<~EOS
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+      <key>KeepAlive</key>
+      <true/>
+      <key>Label</key>
+      <string>#{plist_name}</string>
+      <key>ProgramArguments</key>
+      <array>
+        <string>#{opt_bin}/mysqld_safe</string>
+        <string>--datadir=#{var}/db/mysql</string>
+      </array>
+      <key>RunAtLoad</key>
+      <true/>
+      <key>WorkingDirectory</key>
+      <string>#{HOMEBREW_PREFIX}</string>
+    </dict>
+    </plist>
+    EOS
   end
 
   test do
