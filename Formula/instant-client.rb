@@ -20,14 +20,15 @@ end
 class InstantClient < Formula
   desc "Free, light-weight client software for connecting to Oracle databases"
   homepage "https://www.oracle.com/technetwork/topics/intel-macsoft-096467.html"
-  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-12.2.0.1.0.zip",
+  url "file://#{HOMEBREW_CACHE}/instantclient-basic-macos.x64-12.2.0.1.0-2.zip",
     using: CacheDownloadStrategy
-  sha256 "04a84542b5bd0a04bc45445e220a67c959a8826ce987000270705f9a1d553157"
+  sha256 "3ed3102e5a24f0da638694191edb34933309fb472eb1df21ad5c86eedac3ebb9"
+  version "12.2.0.1.0"
 
   resource "sqlplus" do
-    url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-12.2.0.1.0.zip",
+    url "file://#{HOMEBREW_CACHE}/instantclient-sqlplus-macos.x64-12.2.0.1.0-2.zip",
       using: CacheDownloadStrategy
-    sha256 "df4ab35ed15c49f0c341a487afb50f38b65f80cde385d4007af5d922a9e0e5bf"
+    sha256 "d147cbb5b2a954fdcb4b642df4f0bd1153fd56e0f56e7fa301601b4f7e2abe0e"
   end
 
   bottle :unneeded
