@@ -40,7 +40,7 @@ class Hadoop < Formula
     rm_rf "share/hadoop/yarn/test"
 
     # Define the layout of Hadoop directories
-    (buildpath/"libexec/hadoop-layout.sh").write <<-EOS.undent
+    (buildpath/"libexec/hadoop-layout.sh").write <<~EOS
       HADOOP_CONF_DIR=#{etc}/hadoop
       YARN_CONF_DIR=#{etc}/hadoop
       HADOOP_LOG_DIR=#{var}/log/hadoop
@@ -90,7 +90,7 @@ class Hadoop < Formula
     (var/"run/hadoop").mkpath unless File.exist? "#{var}/run/hadoop"
   end
 
-  def caveats; <<-EOS.undent
+  def caveats; <<~EOS
     In Hadoop's config file:
       #{libexec}/etc/hadoop/hadoop-env.sh,
       #{libexec}/etc/hadoop/mapred-env.sh and
