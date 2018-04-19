@@ -1,20 +1,14 @@
 class Mysql < Formula
   desc "Relational database management system"
   homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.21.tar.gz"
-  sha256 "ad29ecb6fb3c3571394fe231633a2d1d188d49e9eb749daa4e8799b7630daa09"
+  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.22.tar.gz"
+  sha256 "5b2a61700af7c99f5630a7dfdb099af9283c3029843cddd9e123bcdbcc4aad03"
 
   depends_on "cmake" => :build
   depends_on :macos => :el_capitan
   depends_on "openssl"
 
   def install
-    # Don't hard-code the libtool path. See:
-    # https://github.com/Homebrew/legacy-homebrew/issues/20185
-    inreplace "cmake/merge_archives.cmake.in",
-      "COMMAND /usr/bin/libtool -static -o ${TARGET_LOC} ${LIB_LOCATIONS}",
-      "COMMAND libtool -static -o ${TARGET_LOC} ${LIB_LOCATIONS}"
-
     # -DINSTALL_* are relative to prefix
     args = %W[
       -DBUILD_CONFIG=mysql_release
