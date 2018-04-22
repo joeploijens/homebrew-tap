@@ -1,47 +1,37 @@
 class Mysql < Formula
   desc "Relational database management system"
-  homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.22.tar.gz"
-  sha256 "5b2a61700af7c99f5630a7dfdb099af9283c3029843cddd9e123bcdbcc4aad03"
+  homepage "https://dev.mysql.com/doc/refman/8.0/en/"
+  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.11.tar.gz"
+  sha256 "f40711a9bd91ab2ccea331484a6d281f806b0fdecf78f4c9e9d8a4c91208f309"
 
   depends_on "cmake" => :build
-  depends_on :macos => :el_capitan
   depends_on "openssl"
+  depends_on :macos => :el_capitan
 
   def install
     # -DINSTALL_* are relative to prefix
     args = %W[
       -DBUILD_CONFIG=mysql_release
       -DFEATURE_SET=community
-      -DINSTALL_DOCDIR=share/doc/#{name}
+      -DINSTALL_DOCDIR=share/doc/mysql
       -DINSTALL_INCLUDEDIR=include/mysql
       -DINSTALL_INFODIR=share/info
       -DINSTALL_MANDIR=share/man
       -DINSTALL_MYSQLSHAREDIR=share/mysql
       -DINSTALL_MYSQLTESTDIR=
       -DINSTALL_PLUGINDIR=lib/mysql/plugin
-      -DINSTALL_SCRIPTDIR=bin
       -DINSTALL_SUPPORTFILESDIR=share/mysql
       -DMYSQL_DATADIR=#{var}/db/mysql
       -DSYSCONFDIR=#{etc}
-      -DDEFAULT_CHARSET=utf8
-      -DDEFAULT_COLLATION=utf8_general_ci
       -DENABLED_LOCAL_INFILE=ON
-      -DWITH_DEBUG=OFF
-      -DWITH_EMBEDDED_SERVER=OFF
-      -DWITH_EDITLINE=system
-      -DWITH_INNOBASE_STORAGE_ENGINE=1
-      -DWITH_SSL=system
       -DWITH_BOOST=boost
+      -DWITH_EDITLINE=system
+      -DWITH_SSL=system
     ]
 
     system "cmake", ".", *std_cmake_args, *args
     system "make"
     system "make", "install"
-
-    # Don't create databases inside of the prefix!
-    # See: https://github.com/Homebrew/legacy-homebrew/issues/4975
-    rm_rf prefix/"data"
 
     # Fix up the control script and link into bin
     inreplace "#{pkgshare}/mysql.server",
