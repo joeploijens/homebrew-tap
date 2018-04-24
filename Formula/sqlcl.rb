@@ -20,13 +20,13 @@ end
 class Sqlcl < Formula
   desc "Free, Java-based command-line interface for Oracle databases"
   homepage "https://www.oracle.com/technetwork/developer-tools/sql-developer/overview/index.html"
-  url "file://#{HOMEBREW_CACHE}/sqlcl-18.1.0.zip",
+  url "file://#{HOMEBREW_CACHE}/sqlcl-18.1.1.zip",
     using: CacheDownloadStrategy
-  sha256 "ccd04d6324cd7ee9c7b7f3d5e7be86acd1d0ed40803489f30e3250b4d3201b5a"
+  sha256 "3180aab7886222a5ffeb2578c68ba8c835d00400560a6f79dbf7cb6f02f242d5"
 
   bottle :unneeded
 
-  depends_on java: "1.8+"
+  depends_on java: "1.8"
 
   def install
     # Remove Windows files
