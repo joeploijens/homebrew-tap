@@ -37,6 +37,7 @@ class Sqlcl < Formula
 
     libexec.install %w[bin lib]
     bin.write_exec_script Dir["#{libexec}/bin/sql"]
+    bin.env_script_all_files(libexec/"bin", Language::Java.java_home_env("1.8"))
     mv "#{bin}/sql", "#{bin}/sqlcl"
   end
 
