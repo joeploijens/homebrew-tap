@@ -35,10 +35,9 @@ class Sqlcl < Formula
     prefix.install "bin/README.md"
     rm_f "bin/README.md"
 
-    libexec.install %w[bin lib]
-    bin.write_exec_script Dir["#{libexec}/bin/sql"]
+    bin.install "bin/sql" => "sqlcl"
+    libexec.install "lib"
     bin.env_script_all_files(libexec/"bin", Language::Java.java_home_env("1.8"))
-    mv "#{bin}/sql", "#{bin}/sqlcl"
   end
 
   test do
