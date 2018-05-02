@@ -6,16 +6,17 @@ class Mysql < Formula
 
   depends_on "cmake" => :build
   depends_on "openssl"
-  depends_on :macos => :el_capitan
+  depends_on :macos => :sierra
 
   def install
     # -DINSTALL_* are relative to prefix
     args = %W[
       -DBUILD_CONFIG=mysql_release
-      -DFEATURE_SET=community
+      -DENABLED_LOCAL_INFILE=ON
       -DINSTALL_DOCDIR=share/doc/mysql
       -DINSTALL_INCLUDEDIR=include/mysql
       -DINSTALL_INFODIR=share/info
+      -DINSTALL_LIBDIR=lib/mysql
       -DINSTALL_MANDIR=share/man
       -DINSTALL_MYSQLSHAREDIR=share/mysql
       -DINSTALL_MYSQLTESTDIR=
@@ -23,7 +24,6 @@ class Mysql < Formula
       -DINSTALL_SUPPORTFILESDIR=share/mysql
       -DMYSQL_DATADIR=#{var}/db/mysql
       -DSYSCONFDIR=#{etc}
-      -DENABLED_LOCAL_INFILE=ON
       -DWITH_BOOST=boost
       -DWITH_EDITLINE=system
       -DWITH_SSL=system
