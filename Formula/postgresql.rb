@@ -1,9 +1,9 @@
 class Postgresql < Formula
   desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
-  version "10.3"
+  version "10.4"
   url "https://ftp.postgresql.org/pub/source/v#{version}/postgresql-#{version}.tar.bz2"
-  sha256 "6ea268780ee35e88c65cdb0af7955ad90b7d0ef34573867f223f14e43467931a"
+  sha256 "1b60812310bd5756c62d93a9f93de8c28ea63b0df254f428cd1cf1a4d9020048"
 
   depends_on "openssl"
   depends_on "readline"
