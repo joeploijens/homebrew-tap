@@ -2,8 +2,8 @@ class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
 
-  url "https://fastdl.mongodb.org/src/mongodb-src-r3.6.4.tar.gz"
-  sha256 "1a9697c3ad2f5545b5160d5e32d5f3c0f6f0a3371ceb9fa85961aec513acd7ac"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r3.6.5.tar.gz"
+  sha256 "b99535800925b5c5a9a103fdad37559b6cde13e7cdce72310f32ff105ec615df"
 
   option "with-boost", "Compile using installed boost, not the version shipped with mongodb"
   option "with-sasl", "Compile with SASL support"
@@ -32,8 +32,8 @@ class Mongodb < Formula
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      tag: "r3.6.4",
-      revision: "2b10d8492e1185039be4d5f2242a5b11ea102303"
+      tag: "r3.6.5",
+      revision: "f3850cb98e5e005c2de2c82b76b592060f14b9e9"
   end
 
   needs :cxx11
