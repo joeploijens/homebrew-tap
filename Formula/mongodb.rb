@@ -1,19 +1,19 @@
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-
-  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.0.tar.gz"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.1.tar.gz"
   sha256 "34a15085ed65413add38f68028bccebb3e9462777c15e42c1fb291a5c9440798"
 
   option "with-boost", "Compile using installed boost, not the version shipped with mongodb"
   option "with-sasl", "Compile with SASL support"
 
+  depends_on :macos => :el_capitan
   depends_on :xcode => ["8.3.2", :build]
-  depends_on "boost" => :optional
   depends_on "go" => :build
-  depends_on :macos => :mountain_lion
+  depends_on "pkg-config" => :build
   depends_on "scons" => :build
   depends_on "openssl" => :recommended
+  depends_on "boost" => :optional
 
   resource "Cheetah" do
     url "https://files.pythonhosted.org/packages/cd/b0/c2d700252fc251e91c08639ff41a8a5203b627f4e0a2ae18a6b662ab32ea/Cheetah-2.4.4.tar.gz"
@@ -21,8 +21,8 @@ class Mongodb < Formula
   end
 
   resource "PyYAML" do
-    url "https://files.pythonhosted.org/packages/4a/85/db5a2df477072b2902b0eb892feb37d88ac635d36245a72a6a69b23b383a/PyYAML-3.12.tar.gz"
-    sha256 "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
+    url "https://files.pythonhosted.org/packages/9e/a3/1d13970c3f36777c583f136c136f804d70f500168edc1edea6daa7200769/PyYAML-3.13.tar.gz"
+    sha256 "3ef3092145e9b70e3ddd2c7ad59bdd0252a94dfe3949721633e41344de00a6bf"
   end
 
   resource "typing" do
@@ -32,15 +32,13 @@ class Mongodb < Formula
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      tag: "r4.0.0",
-      revision: "ca53f295f44ab94fc7d1a45346c9cdc8b031c370"
+      tag: "r4.0.1",
+      revision: "3737e4158e15074d4579e73e006ab019d09021fd"
   end
 
   needs :cxx11
 
   def install
-    ENV.cxx11 if MacOS.version < :mavericks
-
     ENV.libcxx
 
     ["Cheetah", "PyYAML", "typing"].each do |r|
@@ -87,7 +85,7 @@ class Mongodb < Formula
     args << "--use-system-boost" if build.with? "boost"
     args << "--use-new-tools"
     args << "--build-mongoreplay=true"
-    args << "--disable-warnings-as-errors" if MacOS.version >= :yosemite
+    args << "--disable-warnings-as-errors"
 
     if build.with? "openssl"
       args << "--ssl"
@@ -116,7 +114,7 @@ class Mongodb < Formula
       dbPath: #{var}/mongodb
     net:
       bindIp: 127.0.0.1
-    EOS
+  EOS
   end
 
   plist_options :manual => "mongod --config #{HOMEBREW_PREFIX}/etc/mongod.conf"
@@ -156,7 +154,7 @@ class Mongodb < Formula
       </dict>
     </dict>
     </plist>
-    EOS
+  EOS
   end
 
   test do
