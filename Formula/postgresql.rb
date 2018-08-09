@@ -1,10 +1,11 @@
 class Postgresql < Formula
   desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
-  version "10.4"
+  version "10.5"
   url "https://ftp.postgresql.org/pub/source/v#{version}/postgresql-#{version}.tar.bz2"
-  sha256 "1b60812310bd5756c62d93a9f93de8c28ea63b0df254f428cd1cf1a4d9020048"
+  sha256 "6c8e616c91a45142b85c0aeb1f29ebba4a361309e86469e0fb4617b6a73c4011"
 
+  depends_on "icu4c"
   depends_on "openssl"
   depends_on "readline"
 
@@ -22,6 +23,7 @@ class Postgresql < Formula
       --enable-dtrace
       --with-bonjour
       --with-gssapi
+      --with-icu
       --with-ldap
       --with-libxml
       --with-libxslt
@@ -38,7 +40,7 @@ class Postgresql < Formula
     # Add include and library directories of dependencies, so that they can be
     # used for compiling extensions. Superenv does this when compiling this
     # package, but won't record it for pg_config.
-    deps = %w[openssl readline]
+    deps = %w[icu4c openssl readline]
     with_includes = deps.map { |f| Formula[f].opt_include }.join(":")
     with_libraries = deps.map { |f| Formula[f].opt_lib }.join(":")
     args << "--with-includes=#{with_includes}"
