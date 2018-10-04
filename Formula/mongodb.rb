@@ -1,17 +1,17 @@
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.2.tar.gz"
-  sha256 "adadf5c7f71bee774eb316f64e96c02690fa3ef53b9b5480a97e44cf4df09b86"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.3.tar.gz"
+  sha256 "fbbe840e62376fe850775e98eb10fdf40594a023ecf308abec6dcec44d2bce0c"
 
   option "with-boost", "Compile using installed boost, not the version shipped with mongodb"
   option "with-sasl", "Compile with SASL support"
 
-  depends_on :macos => :el_capitan
-  depends_on :xcode => ["8.3.2", :build]
   depends_on "go" => :build
   depends_on "pkg-config" => :build
   depends_on "scons" => :build
+  depends_on :macos => :el_capitan
+  depends_on :xcode => ["8.3.2", :build]
   depends_on "openssl" => :recommended
   depends_on "boost" => :optional
 
@@ -32,8 +32,8 @@ class Mongodb < Formula
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      tag: "r4.0.2",
-      revision: "3737e4158e15074d4579e73e006ab019d09021fd"
+      tag: "r4.0.3",
+      revision: "8b4d050b856c5e16013487b5ee6ae9f2e62f5625"
   end
 
   needs :cxx11
@@ -111,7 +111,7 @@ class Mongodb < Formula
       path: #{var}/log/mongodb/mongo.log
       logAppend: true
     storage:
-      dbPath: #{var}/mongodb
+      dbPath: #{var}/db/mongodb
     net:
       bindIp: 127.0.0.1
   EOS
