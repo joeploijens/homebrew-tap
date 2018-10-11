@@ -1,9 +1,9 @@
 class Postgresql < Formula
   desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
-  version "10.5"
+  version "11rc1"
   url "https://ftp.postgresql.org/pub/source/v#{version}/postgresql-#{version}.tar.bz2"
-  sha256 "6c8e616c91a45142b85c0aeb1f29ebba4a361309e86469e0fb4617b6a73c4011"
+  sha256 "608c35369b79a40239663c4213267fd08d3184c3a2cd4d6ff71103ca61930609"
 
   depends_on "pkg-config" => :build
   depends_on "icu4c"
@@ -46,22 +46,6 @@ class Postgresql < Formula
     with_libraries = deps.map { |f| Formula[f].opt_lib }.join(":")
     args << "--with-includes=#{with_includes}"
     args << "--with-libraries=#{with_libraries}"
-
-    # As of Xcode/CLT 10.x the Perl headers were moved from /System
-    # to inside the SDK, so we need to use `-iwithsysroot` instead
-    # of `-I` to point to the correct location.
-    # https://www.postgresql.org/message-id/153558865647.1483.573481613491501077%40wrigleys.postgresql.org
-    if DevelopmentTools.clang_build_version >= 1000
-      inreplace "configure",
-                "-I$perl_archlibexp/CORE",
-                "-iwithsysroot $perl_archlibexp/CORE"
-      inreplace "contrib/hstore_plperl/Makefile",
-                "-I$(perl_archlibexp)/CORE",
-                "-iwithsysroot $(perl_archlibexp)/CORE"
-      inreplace "src/pl/plperl/GNUmakefile",
-                "-I$(perl_archlibexp)/CORE",
-                "-iwithsysroot $(perl_archlibexp)/CORE"
-    end
 
     system "./configure", *args
     system "make", "install-world"
