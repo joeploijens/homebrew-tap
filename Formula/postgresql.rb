@@ -1,9 +1,9 @@
 class Postgresql < Formula
   desc "Object-relational database system"
   homepage "https://www.postgresql.org/"
-  version "11rc1"
+  version "11.0"
   url "https://ftp.postgresql.org/pub/source/v#{version}/postgresql-#{version}.tar.bz2"
-  sha256 "608c35369b79a40239663c4213267fd08d3184c3a2cd4d6ff71103ca61930609"
+  sha256 "bf9bba03d0c3902c188af12e454b35343c4a9bf9e377ec2fe50132efb44ef36b"
 
   depends_on "pkg-config" => :build
   depends_on "icu4c"
@@ -34,7 +34,6 @@ class Postgresql < Formula
       --with-perl
       --with-python
       --with-tcl
-      --with-tclconfig=#{MacOS.sdk_path}/System/Library/Frameworks/Tcl.framework
       XML2_CONFIG=:
     ]
 
