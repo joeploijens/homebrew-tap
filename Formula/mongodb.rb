@@ -1,19 +1,15 @@
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.4.tar.gz"
-  sha256 "02baada1c5665c77c58e068ac6e9d0b11371bcd89e1467896765a5e452e6cce3"
-
-  option "with-boost", "Compile using installed boost, not the version shipped with mongodb"
-  option "with-sasl", "Compile with SASL support"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.5.tar.gz"
+  sha256 "d967098fc91d105cdb0f400c8b837e5c2795c3638d7720392bc47afb1efe1c10"
 
   depends_on "go" => :build
   depends_on "pkg-config" => :build
   depends_on "scons" => :build
-  depends_on :macos => :el_capitan
   depends_on :xcode => ["8.3.2", :build]
-  depends_on "openssl" => :recommended
-  depends_on "boost" => :optional
+  depends_on :macos => :el_capitan
+  depends_on "openssl"
 
   resource "Cheetah" do
     url "https://files.pythonhosted.org/packages/cd/b0/c2d700252fc251e91c08639ff41a8a5203b627f4e0a2ae18a6b662ab32ea/Cheetah-2.4.4.tar.gz"
@@ -32,8 +28,8 @@ class Mongodb < Formula
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      tag: "r4.0.4",
-      revision: "0f0d8665c1bd075135148e2ad7359bffe2da02b4"
+      tag: "r4.0.5",
+      revision: "ff4c48505122337b6b38c82bdd00b19c17c2a775"
   end
 
   needs :cxx11
@@ -55,17 +51,9 @@ class Mongodb < Formula
 
     (buildpath/"src/github.com/mongodb/mongo-tools").install resource("mongo-tools")
     cd "src/github.com/mongodb/mongo-tools" do
-      args = %w[]
-
-      if build.with? "openssl"
-        args << "ssl"
-        ENV["LIBRARY_PATH"] = Formula["openssl"].opt_lib
-        ENV["CPATH"] = Formula["openssl"].opt_include
-      end
-
-      args << "sasl" if build.with? "sasl"
-
-      system "./build.sh", *args
+      ENV["CPATH"] = Formula["openssl"].opt_include
+      ENV["LIBRARY_PATH"] = Formula["openssl"].opt_lib
+      system "./build.sh", "ssl"
     end
 
     (buildpath/"src/mongo-tools").install Dir["src/github.com/mongodb/mongo-tools/bin/*"]
@@ -73,26 +61,17 @@ class Mongodb < Formula
     args = %W[
       --prefix=#{prefix}
       -j#{ENV.make_jobs}
+      CC=#{ENV.cc}
+      CXX=#{ENV.cxx}
+      CCFLAGS=-mmacosx-version-min=#{MacOS.version}
+      LINKFLAGS=-mmacosx-version-min=#{MacOS.version}
+      --build-mongoreplay=true
+      --disable-warnings-as-errors
+      --use-new-tools
+      --ssl
+      CCFLAGS=-I#{Formula["openssl"].opt_include}
+      LINKFLAGS=-L#{Formula["openssl"].opt_lib}
     ]
-
-    args << "CC=#{ENV.cc}"
-    args << "CXX=#{ENV.cxx}"
-
-    args << "CCFLAGS=-mmacosx-version-min=#{MacOS.version}"
-    args << "LINKFLAGS=-mmacosx-version-min=#{MacOS.version}"
-
-    args << "--use-sasl-client" if build.with? "sasl"
-    args << "--use-system-boost" if build.with? "boost"
-    args << "--use-new-tools"
-    args << "--build-mongoreplay=true"
-    args << "--disable-warnings-as-errors"
-
-    if build.with? "openssl"
-      args << "--ssl"
-
-      args << "CCFLAGS=-I#{Formula["openssl"].opt_include}"
-      args << "LINKFLAGS=-L#{Formula["openssl"].opt_lib}"
-    end
 
     scons "install", *args
 
