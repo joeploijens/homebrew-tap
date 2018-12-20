@@ -53,6 +53,7 @@ class Mongodb < Formula
     cd "src/github.com/mongodb/mongo-tools" do
       ENV["CPATH"] = Formula["openssl"].opt_include
       ENV["LIBRARY_PATH"] = Formula["openssl"].opt_lib
+      ENV["GOROOT"] = Formula["go"].opt_libexec
       system "./build.sh", "ssl"
     end
 
