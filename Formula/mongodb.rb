@@ -1,8 +1,8 @@
 class Mongodb < Formula
   desc "High-performance, schema-free, document-oriented database"
   homepage "https://www.mongodb.org/"
-  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.5.tar.gz"
-  sha256 "d967098fc91d105cdb0f400c8b837e5c2795c3638d7720392bc47afb1efe1c10"
+  url "https://fastdl.mongodb.org/src/mongodb-src-r4.0.8.tar.gz"
+  sha256 "83e694405b72002588a64275be00bf1e36e12f5955451171645f45cb3f16f251"
 
   depends_on "go" => :build
   depends_on "pkg-config" => :build
@@ -17,8 +17,8 @@ class Mongodb < Formula
   end
 
   resource "PyYAML" do
-    url "https://files.pythonhosted.org/packages/9e/a3/1d13970c3f36777c583f136c136f804d70f500168edc1edea6daa7200769/PyYAML-3.13.tar.gz"
-    sha256 "3ef3092145e9b70e3ddd2c7ad59bdd0252a94dfe3949721633e41344de00a6bf"
+    url "https://files.pythonhosted.org/packages/9f/2c/9417b5c774792634834e730932745bc09a7d36754ca00acf1ccd1ac2594d/PyYAML-5.1.tar.gz"
+    sha256 "436bc774ecf7c103814098159fbb84c2715d25980175292c648f2da143909f95"
   end
 
   resource "typing" do
@@ -28,11 +28,9 @@ class Mongodb < Formula
 
   resource "mongo-tools" do
     url "https://github.com/mongodb/mongo-tools.git",
-      tag: "r4.0.5",
-      revision: "ff4c48505122337b6b38c82bdd00b19c17c2a775"
+      tag: "r4.0.8",
+      revision: "5db0b4a18cc1366ebd368eed8e7c4d426d851f13"
   end
-
-  needs :cxx11
 
   def install
     ENV.libcxx
