@@ -1,8 +1,8 @@
 class Graphicsmagick < Formula
   desc "Image processing tools collection"
   homepage "http://www.graphicsmagick.org/"
-  url "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick/1.3.31/GraphicsMagick-1.3.31.tar.xz"
-  sha256 "096bbb59d6f3abd32b562fc3b34ea90d88741dc5dd888731d61d17e100394278"
+  url "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick/1.3.32/GraphicsMagick-1.3.32.tar.xz"
+  sha256 "b842a5a0d6c84fd6c5f161b5cd8e02bbd210b0c0b6728dd762b7c53062ba94e1"
 
   option "without-magick-plus-plus", "disable build/install of Magick++"
   option "with-perl", "Build PerlMagick; provides the Graphics::Magick module"
@@ -26,12 +26,12 @@ class Graphicsmagick < Formula
     args = %W[
       --prefix=#{prefix}
       --disable-dependency-tracking
-      --enable-shared
-      --disable-static
-      --with-modules
-      --without-lzma
       --disable-openmp
+      --disable-static
+      --enable-shared
+      --with-modules
       --with-quantum-depth=16
+      --without-lzma
     ]
 
     args << "--without-gslib" if build.without? "ghostscript"
