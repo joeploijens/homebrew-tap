@@ -5,7 +5,7 @@ class Mysql < Formula
   sha256 "d44231316ce30a1d1189125ceed86d3388409778e17d0e3b9a060f532463e29a"
 
   depends_on "cmake" => :build
-  depends_on "openssl"
+  depends_on "openssl@1.1"
   depends_on :macos => :high_sierra
 
   def install
