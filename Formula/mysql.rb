@@ -1,12 +1,12 @@
 class Mysql < Formula
   desc "Relational database management system"
   homepage "https://dev.mysql.com/doc/refman/8.0/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.13.tar.gz"
-  sha256 "61f97906050c2a0cc008be347f70c2c6612425c85342466f549088c570b35ff4"
+  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.17.tar.gz"
+  sha256 "d44231316ce30a1d1189125ceed86d3388409778e17d0e3b9a060f532463e29a"
 
   depends_on "cmake" => :build
   depends_on "openssl"
-  depends_on :macos => :sierra
+  depends_on :macos => :high_sierra
 
   def install
     # -DINSTALL_* are relative to prefix
@@ -27,6 +27,7 @@ class Mysql < Formula
       -DWITH_BOOST=boost
       -DWITH_EDITLINE=system
       -DWITH_SSL=system
+      -DWITH_UNIT_TESTS=OFF
     ]
 
     system "cmake", ".", *std_cmake_args, *args
