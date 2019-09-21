@@ -19,14 +19,14 @@ end
 
 class Sqlcl < Formula
   desc "Free, Java-based command-line interface for Oracle databases"
-  homepage "https://www.oracle.com/technetwork/developer-tools/sql-developer/overview/index.html"
-  url "file://#{HOMEBREW_CACHE}/sqlcl-19.1.0.094.1619.zip",
+  homepage "https://www.oracle.com/database/technologies/appdev/sqlcl.html"
+  url "file://#{HOMEBREW_CACHE}/sqlcl-19.2.1.246.1707.zip",
     using: CacheDownloadStrategy
-  sha256 "8e2c02f92846d72aadd74cac7869506d281e45061447887ba1098ace2694c267"
+  sha256 "80ebfbdec7652762c29813ca864b7504e1a6ff21cdd62adc25f03bf57a2067a8"
 
   bottle :unneeded
 
-  depends_on java: "1.8"
+  depends_on java: "11"
 
   def install
     # Remove Windows files
@@ -37,7 +37,7 @@ class Sqlcl < Formula
 
     bin.install "bin/sql" => "sqlcl"
     libexec.install "lib"
-    bin.env_script_all_files(libexec/"bin", Language::Java.java_home_env("1.8"))
+    bin.env_script_all_files(libexec/"bin", Language::Java.java_home_env("11"))
   end
 
   test do
