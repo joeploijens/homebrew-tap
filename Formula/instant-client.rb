@@ -24,7 +24,7 @@ class InstantClient < Formula
     # Fix install names
     system "install_name_tool", "-id", "@rpath/liboramysql19.dylib", "liboramysql19.dylib"
 
-    prefix.install Dir["*_README", "*_LICENSE]
+    prefix.install Dir["*_README", "*_LICENSE"]
     bin.install %W[adrci genezi uidrvci sqlplus]
     lib.install Dir["*.dylib*"]
     (prefix/"network/admin").mkpath
