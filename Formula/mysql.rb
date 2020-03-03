@@ -8,6 +8,8 @@ class Mysql < Formula
   depends_on "openssl@1.1"
   depends_on :macos => :high_sierra
 
+  uses_from_macos "libedit"
+
   def install
     # -DINSTALL_* are relative to prefix
     args = %W[
