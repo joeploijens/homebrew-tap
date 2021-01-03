@@ -1,13 +1,13 @@
 class InstantClient < Formula
   desc "Free, light-weight client software for connecting to Oracle databases"
   homepage "https://www.oracle.com/database/technologies/instant-client.html"
-  url "https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-basic-macos.x64-19.3.0.0.0dbru.zip"
-  sha256 "f4335c1d53e8188a3a8cdfb97494ff87c4d0f481309284cf086dc64080a60abd"
-  version "19.3.0.0.0"
+  url "https://download.oracle.com/otn_software/mac/instantclient/198000/instantclient-basic-macos.x64-19.8.0.0.0dbru.zip"
+  sha256 "57ed4198f3a10d83cd5ddc2472c058d4c3b0b786246baebf6bbfc7391cc12087"
+  version "19.8.0.0.0"
 
   resource "sqlplus" do
-    url "https://download.oracle.com/otn_software/mac/instantclient/193000/instantclient-sqlplus-macos.x64-19.3.0.0.0dbru.zip"
-    sha256 "f7565c3cbf898b0a7953fbb0017c5edd9d11d1863781588b7caf3a69937a2e9e"
+    url "https://download.oracle.com/otn_software/mac/instantclient/198000/instantclient-sqlplus-macos.x64-19.8.0.0.0dbru.zip"
+    sha256 "d3cba88b0a0a3d9993c4b64b611569d146cdf36ec55dd84eba4783517bd30959"
   end
 
   bottle :unneeded
@@ -28,7 +28,7 @@ class InstantClient < Formula
     bin.install %W[adrci genezi uidrvci sqlplus]
     lib.install Dir["*.dylib*"]
     (prefix/"network/admin").mkpath
-    (prefix/"network/admin").install "README"
+    (prefix/"network/admin").install "network/admin/README"
     (prefix/"sqlplus/admin").mkpath
     (prefix/"sqlplus/admin").install "glogin.sql"
   end
