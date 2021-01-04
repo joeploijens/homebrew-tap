@@ -12,6 +12,7 @@ class InstantClient < Formula
 
   bottle :unneeded
 
+  depends_on arch: :x86_64
   depends_on macos: :high_sierra
 
   def install
