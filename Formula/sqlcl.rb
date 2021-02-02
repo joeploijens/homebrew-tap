@@ -20,9 +20,9 @@ end
 class Sqlcl < Formula
   desc "Free, Java-based command-line interface for Oracle databases"
   homepage "https://www.oracle.com/database/technologies/appdev/sqlcl.html"
-  url "file://#{HOMEBREW_CACHE}/sqlcl-20.3.0.274.1916.zip",
+  url "file://#{HOMEBREW_CACHE}/sqlcl-20.4.1.351.1718.zip",
     using: CacheDownloadStrategy
-  sha256 "5ff66a0704d8cd117d77045c4a877d12447ff14a7ae1e4dfcbfd5a56d0b72eb0"
+  sha256 "7d69d50408e010c223e6f6a3efbf8b9d20832032219d53afe36a84707ba5073b"
 
   bottle :unneeded
 
@@ -33,7 +33,7 @@ class Sqlcl < Formula
     rm_f "bin/sql.exe"
 
     prefix.install "README.md"
-    rm_f "20.3.0.274.1916"
+    rm_f "20.4.1.351.1718"
     rm_f "bin/README.md"
     rm_f "bin/dependencies.txt"
     rm_f "bin/version.txt"
