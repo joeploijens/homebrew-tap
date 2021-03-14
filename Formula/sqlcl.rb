@@ -26,6 +26,7 @@ class Sqlcl < Formula
 
   bottle :unneeded
 
+  depends_on arch: :x86_64
   depends_on "openjdk@11"
 
   def install
