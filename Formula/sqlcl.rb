@@ -1,5 +1,5 @@
 class CacheDownloadStrategy < CurlDownloadStrategy
-  def fetch
+  def fetch(timeout: nil, **options)
     archive = @url.sub(%r[^file://], "")
     unless File.exists?(archive)
       odie <<~EOS
