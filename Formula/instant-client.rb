@@ -10,8 +10,6 @@ class InstantClient < Formula
     sha256 "d3cba88b0a0a3d9993c4b64b611569d146cdf36ec55dd84eba4783517bd30959"
   end
 
-  bottle :unneeded
-
   depends_on arch: :x86_64
   depends_on macos: :high_sierra
 

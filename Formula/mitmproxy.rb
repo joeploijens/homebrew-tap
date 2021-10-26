@@ -5,8 +5,6 @@ class Mitmproxy < Formula
   url "https://snapshots.mitmproxy.org/#{version}/mitmproxy-#{version}-osx.tar.gz"
   sha256 "147011483150653409c202ab0cda6dc77e215dbc8a09b197580454e514988791"
 
-  bottle :unneeded
-
   def install
     bin.install "mitmdump", "mitmproxy", "mitmweb"
   end
