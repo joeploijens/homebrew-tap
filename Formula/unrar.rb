@@ -1,8 +1,8 @@
 class Unrar < Formula
   desc "Extract, view, and test RAR archives"
   homepage "https://www.rarlab.com/"
-  url "https://www.rarlab.com/rar/unrarsrc-6.0.6.tar.gz"
-  sha256 "011ef7290d3394a62bb5bfced914cd510a7eea7255cf69417f9c952bb6056588"
+  url "https://www.rarlab.com/rar/unrarsrc-6.1.6.tar.gz"
+  sha256 "67f4ab891c062218c2badfaac9c8cab5c8bfd5e96dabfca56c8faa3d209a801d"
   license :cannot_represent
 
   def install
