@@ -1,8 +1,8 @@
 class Flac < Formula
   desc "Free lossless audio codec"
   homepage "https://xiph.org/flac/"
-  url "https://downloads.xiph.org/releases/flac/flac-1.3.3.tar.xz"
-  sha256 "213e82bd716c9de6db2f98bcadbc4c24c7e2efe8c75939a1a84e28539c4e1748"
+  url "https://downloads.xiph.org/releases/flac/flac-1.4.0.tar.xz"
+  sha256 "af41c0733c93c237c3e52f64dd87e3b0d9af38259f1c7d11e8cbf583c48c2506"
 
   depends_on "pkg-config" => :build
 
