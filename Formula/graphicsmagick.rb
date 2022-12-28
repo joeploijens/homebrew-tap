@@ -1,8 +1,8 @@
 class Graphicsmagick < Formula
   desc "Image processing tools collection"
   homepage "http://www.graphicsmagick.org/"
-  url "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick/1.3.38/GraphicsMagick-1.3.38.tar.xz"
-  sha256 "d60cd9db59351d2b9cb19beb443170acaa28f073d13d258f67b3627635e32675"
+  url "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick/1.3.39/GraphicsMagick-1.3.39.tar.xz"
+  sha256 "e30b1ca58e873d0a1ee208384724424db2d3c33a54034e261d14e8fbb8f8d04f"
   license "MIT"
 
   depends_on "pkg-config" => :build
